@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CamControl</title>
+    <link rel="icon" href="https://emojicdn.elk.sh/📹" />
+    <link rel="preconnect" href="https://rsms.me/" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Inter", "system-ui"],
+            },
+          },
+        },
+      };
+    </script>
+    <script>
+      const CAM_IP = "192.168.178.10";
+
+      function makeControlRequest(view) {
+        const url = new URL("http://" + CAM_IP);
+        url.searchParams.set("view", view);
+
+        fetch(url).catch((e) => console.error("request to camera failed"));
+      }
+
+      function toView(view) {
+        if (!CAM_IP) {
+          alert("Bitte gib zuerst die IP der Kamera an.");
+          return;
+        }
+
+        makeControlRequest(view);
+      }
+    </script>
+  </head>
+  <body class="antialiased bg-slate-100 text-slate-800">
+    <div class="h-screen grid place-items-center text-center">
+      <div>
+        <h1
+          class="font-extrabold text-slate-900 text-4xl tracking-tight flex items-center justify-center"
+        >
+          CamControl
+          <img
+            class="ml-2"
+            width="32"
+            height="32"
+            src="https://emojicdn.elk.sh/📹"
+            alt=""
+          />
+        </h1>
+        <p class="mt-2 text-lg">
+          Klicke auf einen der Buttons, um die Position der Kamera zu ändern.
+        </p>
+        <div class="mt-8 space-x-4" x-data>
+          <button
+            x-on:click="toView(1)"
+            class="px-4 py-2 bg-sky-600 font-medium text-white rounded-md transition-colors hover:bg-sky-700"
+          >
+            Redner
+          </button>
+          <button
+            x-on:click="toView(2)"
+            class="px-4 py-2 bg-sky-600 font-medium text-white rounded-md transition-colors hover:bg-sky-700"
+          >
+            Leser/Vorsitz
+          </button>
+          <button
+            x-on:click="toView(4)"
+            class="px-4 py-2 bg-sky-600 font-medium text-white rounded-md transition-colors hover:bg-sky-700"
+          >
+            Tisch
+          </button>
+          <button
+            x-on:click="toView(5)"
+            class="px-4 py-2 bg-sky-600 font-medium text-white rounded-md transition-colors hover:bg-sky-700"
+          >
+            Aufgabe im Stehen
+          </button>
+          <button
+            x-on:click="toView(3)"
+            class="px-4 py-2 bg-sky-600 font-medium text-white rounded-md transition-colors hover:bg-sky-700"
+          >
+            Totale
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
