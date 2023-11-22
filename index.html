@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://rsms.me/" />
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="https://unpkg.com/alpinejs" defer></script>
     <script>
       tailwind.config = {
         theme: {
@@ -58,7 +58,7 @@
         <p class="mt-2 text-lg">
           Klicke auf einen der Buttons, um die Position der Kamera zu ändern.
         </p>
-        <div class="mt-8 space-x-4" x-data>
+        <div class="mt-4 space-x-4 space-y-4" x-data>
           <button
             x-on:click="toView(1)"
             class="px-4 py-2 bg-sky-600 font-medium text-white rounded-md transition-colors hover:bg-sky-700"
